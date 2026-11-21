@@ -90,6 +90,7 @@ $(ME_ATR): $(ME_XEX) data/emacs.hlp data/welcome.txt $(DISK_PREREQS)
 # Tests
 # ---------------------------------------------------------------------------
 include mk/test-unit.mk
+include mk/test-integration.mk
 
 # ---------------------------------------------------------------------------
 # Release archive
@@ -117,7 +118,7 @@ atr: $(ME_ATR) ## Build bootable DOS 2.5 disk build/me.atr
 run: $(ME_ATR) ## Boot build/me.atr in the atari800 emulator
 	$(ATARI800) -xl -nobasic $(ME_ATR)
 
-test: test-unit ## Run the test suites
+test: test-unit test-integration ## Run the unit and integration test suites
 
 dist: $(DIST_ZIP) ## Package me.xex and me.atr for a release
 
