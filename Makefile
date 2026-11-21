@@ -87,6 +87,11 @@ $(ME_ATR): $(ME_XEX) data/emacs.hlp data/welcome.txt $(DISK_PREREQS)
 	$(Q)$(MKATR) 720 $@ AUTORUN.SYS=$(ME_XEX) EMACS.HLP~data/emacs.hlp WELCOME.TXT~data/welcome.txt
 
 # ---------------------------------------------------------------------------
+# Tests
+# ---------------------------------------------------------------------------
+include mk/test-unit.mk
+
+# ---------------------------------------------------------------------------
 # Release archive
 # ---------------------------------------------------------------------------
 DIST_NAME := atari-emacs-$(VERSION)
@@ -103,7 +108,7 @@ $(DIST_ZIP): $(ME_XEX) $(ME_ATR) README.md LICENSE NOTICE
 # ---------------------------------------------------------------------------
 # User-facing targets
 # ---------------------------------------------------------------------------
-.PHONY: all atr run dist clean distclean help
+.PHONY: all atr run test dist clean distclean help
 
 all: $(ME_XEX) ## Build build/me.xex (default)
 
@@ -111,6 +116,8 @@ atr: $(ME_ATR) ## Build bootable DOS 2.5 disk build/me.atr
 
 run: $(ME_ATR) ## Boot build/me.atr in the atari800 emulator
 	$(ATARI800) -xl -nobasic $(ME_ATR)
+
+test: test-unit ## Run the test suites
 
 dist: $(DIST_ZIP) ## Package me.xex and me.atr for a release
 
