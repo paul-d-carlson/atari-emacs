@@ -1,0 +1,8 @@
+Welcome to MicroEMACS for the Atari!
+
+Edit this file, then save it with
+Ctrl-X Ctrl-S. Open another file
+with Ctrl-X Ctrl-F.
+
+ESC ?          key binding summary
+Ctrl-X Ctrl-C  exit

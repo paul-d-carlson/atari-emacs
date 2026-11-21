@@ -1,0 +1,7 @@
+# All build output, including downloaded dependencies
+/build/
+
+# Editor and OS cruft
+*~
+*.swp
+.DS_Store

@@ -1,0 +1,18 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+
+# The editor sources follow the upstream MicroEMACS style (mixed tabs
+# and spaces); only the tab width is fixed.
+[src/*.{c,h}]
+tab_width = 8
+
+[tests/**.{c,h,s}]
+indent_style = space
+indent_size = 4
+
+[{Makefile,*.mk}]
+indent_style = tab
