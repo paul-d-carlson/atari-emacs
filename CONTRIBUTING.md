@@ -23,7 +23,8 @@ request how the size changed.
    figures printed by `make test-unit`.
 
 2. Make your change, then run `make test` again. All tests must pass.
-   Compare the size and heap figures with your baseline.
+   Compare the size and heap figures with your baseline. CI runs the same
+   tests on every pull request and shows these figures in the run summary.
 
 3. Add or update tests for any behaviour you change:
    - a unit test in the matching `tests/target/test_<suite>.c`, plus its

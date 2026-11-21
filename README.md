@@ -1,5 +1,7 @@
 # atari-emacs
 
+[![CI](https://github.com/paul-d-carlson/atari-emacs/actions/workflows/ci.yml/badge.svg)](https://github.com/paul-d-carlson/atari-emacs/actions/workflows/ci.yml)
+
 MicroEMACS 3.6 for the Atari 8-bit: an Emacs-style editor with multiple
 buffers, disk file editing and an on-screen key reference, in under 48 KB.
 

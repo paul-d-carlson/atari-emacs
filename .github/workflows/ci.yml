@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+permissions:
+  contents: read
+
+# -o pipefail: a failing `make` must fail its step even when piped to tee.
+defaults:
+  run:
+    shell: bash -eo pipefail {0}
+
+jobs:
+  build-test:
+    name: Build and test
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install cc65
+        run: sudo apt-get update && sudo apt-get install -y cc65 zip
+
+      - name: Cache third-party tools
+        uses: actions/cache@v4
+        with:
+          path: build/deps
+          key: deps-${{ runner.os }}-${{ hashFiles('mk/deps.mk', 'tools/fetch.sh') }}
+
+      - name: Fetch and build dependencies
+        run: make deps
+
+      - name: Build me.xex and me.atr
+        run: make -j4 all atr
+
+      - name: Run unit tests
+        run: make test-unit | tee unit.log
+
+      - name: Run integration tests
+        run: make test-integration | tee integration.log
+
+      - name: Memory summary
+        if: always()
+        run: |
+          {
+            echo "### Memory"
+            if [ -f build/me.xex ]; then
+              echo "- me.xex: $(wc -c < build/me.xex | tr -d ' ') bytes"
+            fi
+            if [ -f unit.log ]; then
+              grep -E 'tests passed|heap window|peak resident' unit.log | sed 's/^ */- /' || true
+            fi
+            if [ -f integration.log ]; then
+              echo "- integration scenarios passed: $(grep -c 'SCENARIO PASSED' integration.log || true)"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: atari-emacs
+          path: |
+            build/me.xex
+            build/me.atr
+
+  release:
+    name: Publish release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build-test
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install cc65
+        run: sudo apt-get update && sudo apt-get install -y cc65 zip
+
+      - name: Build release archive
+        run: make deps && make dist
+
+      - name: Create GitHub release
+        run: gh release create "$GITHUB_REF_NAME" build/atari-emacs-*.zip --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}

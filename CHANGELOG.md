@@ -22,6 +22,9 @@ First public release.
 - 181 unit tests running the real 6502 code under libatari800, with heap
   integrity checks and line coverage; end-to-end integration scenarios
   against the shipped binary; and a heap/stack/disk soak test.
+- GitHub Actions CI on Ubuntu 24.04: builds, runs the unit and
+  integration tests, reports code size and heap use, and publishes a
+  release archive for `v*` tags.
 
 ### Fixed
 
