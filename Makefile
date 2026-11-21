@@ -6,7 +6,7 @@
 .DELETE_ON_ERROR:
 .SUFFIXES:
 
-VERSION := 0.1.0
+VERSION := 0.2.0
 
 include mk/config.mk
 include mk/deps.mk
@@ -109,7 +109,7 @@ $(DIST_ZIP): $(ME_XEX) $(ME_ATR) README.md LICENSE NOTICE
 # ---------------------------------------------------------------------------
 # User-facing targets
 # ---------------------------------------------------------------------------
-.PHONY: all atr run test dist clean distclean help
+.PHONY: all atr run test dist version clean distclean help
 
 all: $(ME_XEX) ## Build build/me.xex (default)
 
@@ -121,6 +121,9 @@ run: $(ME_ATR) ## Boot build/me.atr in the atari800 emulator
 test: test-unit test-integration ## Run the unit and integration test suites
 
 dist: $(DIST_ZIP) ## Package me.xex and me.atr for a release
+
+version: ## Print the project version
+	@echo $(VERSION)
 
 clean: ## Remove build output (keeps downloaded dependencies)
 	$(Q)if [ -d $(BUILD_DIR) ]; then \

@@ -76,6 +76,14 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - name: Check tag matches VERSION
+        run: |
+          version=$(make -s version)
+          if [ "$GITHUB_REF_NAME" != "v$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match VERSION $version in the Makefile"
+            exit 1
+          fi
+
       - name: Install cc65
         run: sudo apt-get update && sudo apt-get install -y cc65 zip
 

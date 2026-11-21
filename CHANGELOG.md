@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format is
 based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 the project uses [Semantic Versioning](https://semver.org/).
 
+## [0.2.0] - 2026-11-21
+
+### Changed
+
+- CI uses the Node 24 releases of the GitHub Actions it depends on.
+- The release job fails if the pushed tag does not match `VERSION` in
+  the Makefile, so a release can never ship a misnamed archive.
+
 ## [0.1.0] - 2026-11-21
 
 First public release.
@@ -32,4 +40,5 @@ First public release.
   `ffputline()` and `ffgetline()` used 8-bit loop counters that wrapped
   around.
 
+[0.2.0]: https://github.com/paul-d-carlson/atari-emacs/releases/tag/v0.2.0
 [0.1.0]: https://github.com/paul-d-carlson/atari-emacs/releases/tag/v0.1.0
