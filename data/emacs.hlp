@@ -1,0 +1,44 @@
+MicroEMACS 3.6 -- Atari Quick Reference
+ESC = META prefix  ^X = Ctrl-X prefix
+
+--- CURSOR MOVEMENT ---
+^F / ^B     Forward / Backward char
+^N / ^P     Next / Previous line
+^A / ^E     Start / End of line
+^V / ^Z     Scroll down / up one screen
+M-< / M->   Beginning / End of file
+M-G         Go to line number
+
+--- EDITING ---
+DEL         Delete previous character
+^D          Delete next character
+^K          Kill to end of line
+^O          Open (insert) blank line
+^L          Refresh (redraw) screen
+
+--- CUT AND PASTE ---
+M-SPACE     Set MARK at cursor
+^Y          Yank (paste) kill buffer
+
+--- SEARCH ---
+^S          Search forward (end: ESC)
+
+--- FILES ---
+^X^F        Find/open file
+^X^R        Read file into curr buffer
+^X^S        Save current buffer
+^X^W        Write buffer to new filename
+^X =        Show cursor position
+
+--- BUFFERS ---
+^X B        Switch to named buffer
+^X X        Cycle to next buffer
+^X K        Kill (delete) a buffer
+^X D        Directory listing (Dired)
+
+--- EXIT ---
+^X^C / M-Z  Exit MicroEMACS (confirms if unsaved changes)
+^G          Cancel current command
+
+--- HELP ---
+M-?         Show this help screen
