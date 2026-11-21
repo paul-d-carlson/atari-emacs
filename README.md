@@ -10,6 +10,10 @@ buffers, disk file editing and an on-screen key reference, in under 48 KB.
 - Covered by 181 unit tests and end-to-end editing scenarios that run the
   real 6502 binary under emulation (see [tests/README.md](tests/README.md)).
 
+| Editing a buffer | Built-in help (`M-?`) |
+|:---:|:---:|
+| ![MicroEMACS editing a buffer on the Atari 40-column screen](doc/images/editing.png) | ![The MicroEMACS quick-reference help screen](doc/images/help.png) |
+
 ## Building
 
 ### Requirements
